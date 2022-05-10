@@ -31,7 +31,7 @@ class LoginController extends Controller
 
         return response()->json([
             'status' => false,
-            'message' => 'Email atau password tidak ditemukan!'
+            'message' => 'Akun tidak ditemukan!'
         ]);
     }
 

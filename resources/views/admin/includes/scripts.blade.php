@@ -10,3 +10,6 @@
 
 <!-- Tata Toaster JS -->
 <script src="https://cdn.jsdelivr.net/npm/tata-js@0.1.5/dist/tata.min.js"></script>
+
+<!-- Custom JS -->
+<script src="{{ asset('admin/js/app.js') }}"></script>

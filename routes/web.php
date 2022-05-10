@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductGalleriesController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\SettingController;
@@ -50,6 +52,22 @@ Route::prefix('admin')
         Route::get('permissions/create', [PermissionController::class, 'create'])->name('create-permission');
         Route::post('permissions/store', [PermissionController::class, 'store'])->name('store-permission');
         Route::delete('permissions/delete/{id}', [PermissionController::class, 'delete'])->name('delete-permission');
+
+        Route::get('products', [ProductsController::class, 'index'])->name('products');
+        Route::get('product/create', [ProductsController::class, 'create'])->name('create-product');
+        Route::post('product/store', [ProductsController::class, 'store'])->name('store-product');
+        Route::get('product/{id}/edit', [ProductsController::class, 'edit'])->name('edit-product');
+        Route::put('product/update/{id}', [ProductsController::class, 'update'])->name('update-product');
+        Route::delete('product/delete/{id}', [ProductsController::class, 'delete'])->name('delete-product');
+
+        Route::get('product-galleries/{id}', [ProductGalleriesController::class, 'show'])->name('product-galleries');
+        Route::get('product-galleries/create/{id}', [ProductGalleriesController::class, 'create'])->name('create-product-gallery');
+        Route::post('product-galleries/store/{id}', [ProductGalleriesController::class, 'store'])->name('store-product-gallery');
+        Route::delete('product-galleries/delete/{id}', [ProductGalleriesController::class, 'delete'])->name('delete-product-gallery');
+
+        Route::get('order', function () {
+            echo 'Dalam pengembangan';
+        })->name('order');
 
         Route::get('remove-cache', [SettingController::class, 'removeCacheRoleAndPermission'])->name('remove-cache');
 

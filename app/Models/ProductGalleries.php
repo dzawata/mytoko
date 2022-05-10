@@ -5,14 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserHasRole extends Model
+class ProductGalleries extends Model
 {
     use HasFactory;
 
-    protected $table = 'user_has_role';
+    protected $table = 'product_galleries';
 
     protected $fillable = [
-        'role_id',
-        'user_id'
+        'product_id',
+        'image',
+        'is_cover',
+        'created_at',
+        'updated_at',
     ];
 }

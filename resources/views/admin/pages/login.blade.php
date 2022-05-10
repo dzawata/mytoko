@@ -74,6 +74,9 @@ Login
     jQuery('.btn-login').on('click', login);
 
     function login() {
+
+        jQuery(".btn-login").html('Autentifikasi...');
+
         jQuery.ajax({
             'headers': {
                 'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
@@ -88,6 +91,9 @@ Login
                 'rememberme': jQuery('#customCheck').is(':checked'),
             },
             'success': function(response) {
+
+                jQuery(".btn-login").html('Login');
+
                 jQuery('.help-block').html('');
                 if (response.status) {
                     window.location.href = "admin/dashboard";
@@ -95,6 +101,9 @@ Login
                 jQuery('.help-block-message').html(response.message);
             },
             'error': function(response) {
+
+                jQuery(".btn-login").html('Login');
+
                 if (response.responseJSON !== undefined) {
                     jQuery('.help-block').html('');
                     let data = response.responseJSON.errors;
