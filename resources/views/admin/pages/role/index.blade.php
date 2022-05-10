@@ -82,9 +82,6 @@
 <!-- Page level custom scripts -->
 <script src="{{ asset('admin/js/demo/datatables-demo.js') }}"></script>
 
-<!-- confirmation -->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
     jQuery(document).ready(function() {
         jQuery("#roles").DataTable();

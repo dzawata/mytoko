@@ -13,16 +13,16 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h4 class="m-0 font-weight-bold text-primary">{{$title}} {{$productName}}</h4>
+        <h4 class="m-0 font-weight-bold text-primary">{{$title}}</h4>
     </div>
     <div class="card-body">
         <div class="text-right">
-            @can('create_product_gallery')
-            <a href="{{ route('create-product-gallery', $productId) }}" class="btn btn-sm btn-primary btn-icon-split">
+            @can('create_order')
+            <a href="{{ route('create-order') }}" class="btn btn-sm btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>
-                <span class="text">Tambah Product Gallery</span>
+                <span class="text">Tambah Order</span>
             </a>
             @endcan
         </div>
@@ -32,32 +32,37 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Source</th>
-                        <th class="text-center">Show</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th class="text-center">Edit</th>
                         <th class="text-center">Hapus</th>
                     </tr>
                 </thead>
                 <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Source</th>
-                        <th class="text-center">Show</th>
+                        <th>Tanggal</th>
+                        <th>Status</th>
+                        <th class="text-center">Edit</th>
                         <th class="text-center">Hapus</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach($galleries as $gallery)
+                    @foreach($orders as $order)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $gallery->image }}</td>
+                        <td>{{ $order->tanggal }}</td>
+                        <td>{{ $order->status }}</td>
                         <td class="text-center">
-                            <a href="{{ asset('storage/'.$gallery->image)  }}" target="_blank" data-id="{{ $gallery->id }}" class="btn btn-info btn-circle btn-sm">
-                                <i class="fas fa-eye"></i>
+                            @can('edit_order')
+                            <a href="{{ route('edit-order', $order->id) }}" data-id="{{ $order->id }}" class="btn btn-success btn-circle btn-sm">
+                                <i class="fas fa-check"></i>
                             </a>
+                            @endcan
                         </td>
                         <td class="text-center">
-                            @can('delete_product_gallery')
-                            <form method="post" class="delete-form" data-route="{{ route('delete-product-gallery', $gallery->id) }}">
+                            @can('delete_order')
+                            <form method="post" class="delete-form" data-route="{{route('delete-order',$order->id)}}">
                                 <a type="submit" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
                             </form>
                             @endcan

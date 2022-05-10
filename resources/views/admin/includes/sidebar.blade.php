@@ -28,7 +28,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('order') }}">
+        <a class="nav-link" href="{{ route('orders') }}">
             <i class="fas fa-fw fa-users"></i>
             <span>Order</span></a>
     </li>

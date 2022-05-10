@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductGalleriesController;
 use App\Http\Controllers\ProductsController;
@@ -65,9 +66,11 @@ Route::prefix('admin')
         Route::post('product-galleries/store/{id}', [ProductGalleriesController::class, 'store'])->name('store-product-gallery');
         Route::delete('product-galleries/delete/{id}', [ProductGalleriesController::class, 'delete'])->name('delete-product-gallery');
 
-        Route::get('order', function () {
-            echo 'Dalam pengembangan';
-        })->name('order');
+        Route::get('order', [OrdersController::class, 'index'])->name('orders');
+        Route::get('order/create', [OrdersController::class, 'create'])->name('create-order');
+        Route::post('order/store', [OrdersController::class, 'store'])->name('store-order');
+        Route::get('order/{id}/edit', [OrdersController::class, 'edit'])->name('edit-order');
+        Route::get('order/delete/{id}', [OrdersController::class, 'delete'])->name('delete-order');
 
         Route::get('remove-cache', [SettingController::class, 'removeCacheRoleAndPermission'])->name('remove-cache');
 
