@@ -48,4 +48,9 @@ class OrdersController extends Controller
             ]);
         }
     }
+
+    public function rincian($id)
+    {
+        dd($id);
+    }
 }

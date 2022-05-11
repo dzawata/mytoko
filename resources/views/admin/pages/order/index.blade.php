@@ -34,6 +34,7 @@
                         <th>ID</th>
                         <th>Tanggal</th>
                         <th>Status</th>
+                        <th class="text-center">Rincian</th>
                         <th class="text-center">Edit</th>
                         <th class="text-center">Hapus</th>
                     </tr>
@@ -43,6 +44,7 @@
                         <th>ID</th>
                         <th>Tanggal</th>
                         <th>Status</th>
+                        <th class="text-center">Rincian</th>
                         <th class="text-center">Edit</th>
                         <th class="text-center">Hapus</th>
                     </tr>
@@ -53,6 +55,11 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $order->tanggal }}</td>
                         <td>{{ $order->status }}</td>
+                        <td class="text-center">
+                            <a href="{{ route('rincian-order', $order->id) }}" data-id="{{ $order->id }}" class="btn btn-primary btn-circle btn-sm">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
                         <td class="text-center">
                             @can('edit_order')
                             <a href="{{ route('edit-order', $order->id) }}" data-id="{{ $order->id }}" class="btn btn-success btn-circle btn-sm">

@@ -70,7 +70,8 @@ Route::prefix('admin')
         Route::get('order/create', [OrdersController::class, 'create'])->name('create-order');
         Route::post('order/store', [OrdersController::class, 'store'])->name('store-order');
         Route::get('order/{id}/edit', [OrdersController::class, 'edit'])->name('edit-order');
-        Route::get('order/delete/{id}', [OrdersController::class, 'delete'])->name('delete-order');
+        Route::delete('order/delete/{id}', [OrdersController::class, 'delete'])->name('delete-order');
+        Route::get('order/{id}/rincian', [OrdersController::class, 'rincian'])->name('rincian-order');
 
         Route::get('remove-cache', [SettingController::class, 'removeCacheRoleAndPermission'])->name('remove-cache');
 

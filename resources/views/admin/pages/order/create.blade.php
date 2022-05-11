@@ -1,6 +1,7 @@
 @extends('admin.layouts.app')
 
 @push('addon-style')
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.css" rel="stylesheet">
 </link>
 <style>
@@ -27,7 +28,7 @@
                 <form id="form-create" data-action="{{ route('store-order') }}" data-page-url="{{ route('orders') }}">
                     <div class="form-group">
                         <label>Tanggal</label>
-                        <input class="form-control" type="text" name="tanggal" autocomplete="off">
+                        <input class="form-control datepicker" type="text" name="tanggal" autocomplete="off">
                         <p class="help-block help-block-tanggal"></p>
                     </div>
 
@@ -56,7 +57,16 @@
 @endsection
 
 @push('addon-script')
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <script>
+    jQuery(function() {
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'd/m/yy'
+        });
+    });
+
     let pageUrl = jQuery('#form-create').data('page-url');
 
     jQuery('.simpan-data').on('click', function() {
