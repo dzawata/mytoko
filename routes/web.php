@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\ProductGalleriesController;
@@ -73,7 +74,8 @@ Route::prefix('admin')
         Route::put('order/update/{id}', [OrdersController::class, 'update'])->name('update-order');
         Route::delete('order/delete/{id}', [OrdersController::class, 'delete'])->name('delete-order');
 
-        Route::get('order/{id}/rincian', [OrdersController::class, 'rincian'])->name('rincian-order');
+        Route::get('order/{id}/items', [OrderItemController::class, 'list'])->name('order-items');
+        Route::get('order/{id}/item/create', [OrderItemController::class, 'create'])->name('create-order-item');
 
         Route::get('remove-cache', [SettingController::class, 'removeCacheRoleAndPermission'])->name('remove-cache');
 

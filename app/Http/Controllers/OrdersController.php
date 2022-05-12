@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Services\OrderItemService;
 use App\Services\OrderService;
 use Exception;
 use Illuminate\Http\Request;
@@ -73,10 +74,5 @@ class OrdersController extends Controller
                 'message' => $e->getMessage()
             ]);
         }
-    }
-
-    public function rincian($id)
-    {
-        dd($id);
     }
 }
