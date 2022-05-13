@@ -76,6 +76,7 @@ Route::prefix('admin')
 
         Route::get('order/{id}/items', [OrderItemController::class, 'list'])->name('order-items');
         Route::get('order/{id}/item/create', [OrderItemController::class, 'create'])->name('create-order-item');
+        Route::post('order/{id}/item/store', [OrderItemController::class, 'store'])->name('store-order-item');
 
         Route::get('remove-cache', [SettingController::class, 'removeCacheRoleAndPermission'])->name('remove-cache');
 
