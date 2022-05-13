@@ -37,7 +37,8 @@ class OrderService
             $order = Order::findOrFail($id);
 
             $order->update([
-                'tanggal' => $request->tanggal
+                'tanggal' => $request->tanggal,
+                'status' => $request->status
             ]);
 
             return $order;

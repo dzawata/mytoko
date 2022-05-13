@@ -24,14 +24,16 @@ class UpdateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'tanggal' => 'required'
+            'tanggal' => 'required',
+            'status' => 'required'
         ];
     }
 
     public function messages()
     {
         return [
-            'tanggal.required' => 'Tanggal wajib diisi'
+            'tanggal.required' => 'Tanggal wajib diisi',
+            'status.required' => 'Status wajib dipilih'
         ];
     }
 }

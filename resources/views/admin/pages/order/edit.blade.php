@@ -32,6 +32,15 @@
                         <p class="help-block help-block-tanggal"></p>
                     </div>
 
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select class="form-control" id="status" name="status" data-option="{{ $order->status }}">
+                            <option value="onprogress">Onprogress</option>
+                            <option value="finish">Finish</option>
+                        </select>
+                        <p class="help-block help-block-tanggal"></p>
+                    </div>
+
                     <div class="text-right">
                         <a href="javascript:void(0)" class="btn btn-sm btn-warning btn-icon-split kembali">
                             <span class="icon text-white-50">
@@ -67,6 +76,9 @@
         });
     });
 
+    // set status
+    jQuery("#status").val(jQuery("#status").data('option'));
+
     let pageUrl = jQuery('#form-update').data('page-url');
 
     jQuery('.simpan-data').on('click', function() {
@@ -82,7 +94,8 @@
             'cache': false,
             'data': {
                 '_method': 'PUT',
-                'tanggal': jQuery('input[name=tanggal]').val()
+                'tanggal': jQuery('input[name=tanggal]').val(),
+                'status': jQuery("#status").val()
             },
             success: function(response) {
                 if (response.status) {
