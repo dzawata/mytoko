@@ -37,13 +37,13 @@
 
                     <div class="form-group">
                         <label>Keterangan</label>
-                        <textarea class="form-control" name="keterangan"></textarea>
+                        <textarea class="form-control" id="keterangan" name="keterangan"></textarea>
                         <p class="help-block help-block-keterangan"></p>
                     </div>
 
                     <div class="form-group">
                         <label>Catatan</label>
-                        <textarea class="form-control" name="catatan"></textarea>
+                        <textarea class="form-control" id="catatan" name="catatan"></textarea>
                         <p class="help-block help-block-owner"></p>
                     </div>
 

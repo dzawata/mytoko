@@ -55,20 +55,20 @@
                     @foreach($order_items as $order_item)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $order_item->product }}</td>
+                        <td>{{ $order_item->product_name }}</td>
                         <td>{{ $order_item->keterangan }}</td>
                         <td>{{ $order_item->catatan }}</td>
                         <td>{{ $order_item->status }}</td>
                         <td class="text-center">
                             @can('edit_order_item')
-                            <a href="{{ route('edit-order-item', $order_item->id) }}" data-id="{{ $order_item->id }}" class="btn btn-success btn-circle btn-sm">
+                            <a href="#" data-id="{{ $order_item->id }}" class="btn btn-success btn-circle btn-sm">
                                 <i class="fas fa-check"></i>
                             </a>
                             @endcan
                         </td>
                         <td class="text-center">
                             @can('delete_order_item')
-                            <form method="post" class="delete-form" data-route="{{route('delete-order-item',$order_item->id)}}">
+                            <form method="post" class="delete-form" data-route="#">
                                 <a type="submit" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
                             </form>
                             @endcan

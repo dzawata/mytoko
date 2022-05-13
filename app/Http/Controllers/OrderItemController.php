@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use App\Http\Requests\CreateOrderItemRequest;
 use App\Services\OrderItemService;
 use App\Services\OrderService;
 use App\Services\ProductService;
@@ -38,5 +39,23 @@ class OrderItemController extends Controller
             'order_id' => $id,
             'products' => $this->productService->list()
         ]);
+    }
+
+    public function store(CreateOrderItemRequest $createOrderItemRequest, int $id)
+    {
+        try {
+
+            $orderItem = $this->orderItemService->store($createOrderItemRequest, $id);
+
+            return response()->json([
+                'status' => true,
+                'data' => $orderItem
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }
