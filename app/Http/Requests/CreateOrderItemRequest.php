@@ -33,7 +33,7 @@ class CreateOrderItemRequest extends FormRequest
     {
         return [
             "product.required" => "Wajib memilih product",
-            "product.exists" => "Product yang dim=pilih tidak ditemukan",
+            "product.exists" => "Product yang dipilih tidak ditemukan",
             "keterangan.required" => "Keterangan wajib diisi"
         ];
     }
