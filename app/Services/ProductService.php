@@ -10,7 +10,30 @@ class ProductService
 
     public function list()
     {
-        return Product::all();
+        $mitraService = new MitraService;
+
+        $products = [];
+
+        $lists = Product::all();
+
+        foreach ($lists as $list) {
+
+            $toko = [];
+            $owners = explode(",", $list->owner);
+            foreach ($owners as $owner) {
+                $mitra = $mitraService->find($owner);
+                $toko[] = $mitra->mitra;
+            }
+
+            $products[] = (object)[
+                'id' => $list->id,
+                'product_name' => $list->product_name,
+                'slug' => $list->slug,
+                'owner' => implode(", ", $toko),
+            ];
+        }
+
+        return $products;
     }
 
     public function find($id)
@@ -24,7 +47,7 @@ class ProductService
             return Product::create([
                 'product_name' => $request->product_name,
                 'slug' => $request->slug,
-                'owner' => $request->owner
+                'owner' => implode(",", $request->owner)
             ]);
         } catch (Exception $e) {
             throw $e;

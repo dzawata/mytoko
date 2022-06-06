@@ -13,16 +13,16 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h4 class="m-0 font-weight-bold text-primary">{{$title}} - {{$date_order}}</h4>
+        <h4 class="m-0 font-weight-bold text-primary">{{$title}}</h4>
     </div>
     <div class="card-body">
         <div class="text-right">
-            @can('create_order_item')
-            <a href="{{ route('create-order-item', $order_id) }}" class="btn btn-sm btn-primary btn-icon-split">
+            @can('create_mitra')
+            <a href="{{ route('create-mitra') }}" class="btn btn-sm btn-primary btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-plus"></i>
                 </span>
-                <span class="text">Tambah Order Item</span>
+                <span class="text">Tambah Mitra</span>
             </a>
             @endcan
         </div>
@@ -32,10 +32,7 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Product</th>
-                        <th>Keterangan</th>
-                        <th>Catatan</th>
-                        <th>Status</th>
+                        <th>Mitra</th>
                         <th class="text-center">Edit</th>
                         <th class="text-center">Hapus</th>
                     </tr>
@@ -43,32 +40,26 @@
                 <tfoot>
                     <tr>
                         <th>ID</th>
-                        <th>Product</th>
-                        <th>Keterangan</th>
-                        <th>Catatan</th>
-                        <th>Status</th>
+                        <th>Mitra</th>
                         <th class="text-center">Edit</th>
                         <th class="text-center">Hapus</th>
                     </tr>
                 </tfoot>
                 <tbody>
-                    @foreach($order_items as $order_item)
+                    @foreach($listMitra as $mitra)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $order_item->product_name }}</td>
-                        <td>{{ $order_item->keterangan }}</td>
-                        <td>{{ $order_item->catatan }}</td>
-                        <td>{{ $order_item->status }}</td>
+                        <td>{{ $mitra->mitra }}</td>
                         <td class="text-center">
-                            @can('edit_order_item')
-                            <a href="{{ route('edit-order-item', [$order_item->order_id, $order_item->id]) }}" data-id="{{ $order_item->id }}" class="btn btn-success btn-circle btn-sm">
+                            @can('edit_mitra')
+                            <a href="{{ route('edit-mitra', $mitra->id) }}" data-id="{{ $mitra->id }}" class="btn btn-primary btn-circle btn-sm">
                                 <i class="fas fa-check"></i>
                             </a>
                             @endcan
                         </td>
                         <td class="text-center">
-                            @can('delete_order_item')
-                            <form method="post" class="delete-form" data-route="{{ route('delete-order-item', [$order_item->order_id, $order_item->id]) }}">
+                            @can('delete_mitra')
+                            <form method="post" class="delete-form" data-route="{{route('delete-mitra',$mitra->id)}}">
                                 <a type="submit" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
                             </form>
                             @endcan

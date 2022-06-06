@@ -39,7 +39,11 @@
 
                     <div class="form-group">
                         <label>Mitra</label>
-                        <input class="form-control" type="text" name="owner" value="{{$product->owner}}" autocomplete="off">
+                        <select id="owner" name="owner" data-value="{{$product->owner}}" multiple>
+                            @foreach($rekanan as $rekan)
+                            <option value="{{ $rekan->id }}">{{ $rekan->mitra }}</option>
+                            @endforeach
+                        </select>
                         <p class="help-block help-block-owner"></p>
                     </div>
 
@@ -68,11 +72,18 @@
 @endsection
 
 @push('addon-script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.js"></script>
 <script>
     let pageUrl = jQuery('#form-update').data('page-url');
 
+    const displaySelect = new SlimSelect({
+        select: '#owner'
+    })
+    displaySelect.set(jQuery("#owner").data('value'));
+
     jQuery('.simpan-data').on('click', function() {
         let url = jQuery('#form-update').data('action');
+
 
         jQuery.ajax({
             'headers': {

@@ -24,27 +24,11 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-6">
-                <form id="form-create" data-action="{{ route('store-product') }}" data-page-url="{{ route('products') }}">
+                <form id="form-create" data-action="{{ route('update-category', $category->id) }}" data-page-url="{{ route('categories') }}">
                     <div class="form-group">
-                        <label>Nama Product</label>
-                        <input class="form-control" type="text" name="product_name" onkeyup="typeSlug(this)" autocomplete="off">
-                        <p class="help-block help-block-product_name"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Slug</label>
-                        <input class="form-control" type="text" name="slug" autocomplete="off" readonly>
-                        <p class="help-block help-block-slug"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Mitra</label>
-                        <select id="owner" name="owner" multiple>
-                            @foreach($rekanan as $rekan)
-                            <option value="{{ $rekan->id }}">{{ $rekan->mitra }}</option>
-                            @endforeach
-                        </select>
-                        <p class="help-block help-block-owner"></p>
+                        <label>Category</label>
+                        <input class="form-control" type="text" name="category" autocomplete="off" value="{{ $category->category }}">
+                        <p class="help-block help-block-category"></p>
                     </div>
 
                     <div class="text-right">
@@ -54,7 +38,7 @@
                             </span>
                             <span class="text">Kembali</span>
                         </a>
-                        @can('create_product')
+                        @can('create_mitra')
                         <a href="javascript:void(0)" class="btn btn-sm btn-primary btn-icon-split simpan-data">
                             <span class="icon text-white-50">
                                 <i class="fas fa-save"></i>
@@ -72,14 +56,8 @@
 @endsection
 
 @push('addon-script')
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.js"></script>
 <script>
     let pageUrl = jQuery('#form-create').data('page-url');
-
-    const displaySelect = new SlimSelect({
-        select: '#owner'
-    })
 
     jQuery('.simpan-data').on('click', function() {
         let url = jQuery('#form-create').data('action');
@@ -93,9 +71,8 @@
             'dataType': 'json',
             'cache': false,
             'data': {
-                'product_name': jQuery('input[name=product_name]').val(),
-                'slug': jQuery('input[name=slug]').val(),
-                'owner': jQuery('select[name=owner]').val()
+                '_method': 'PUT',
+                'category': jQuery('input[name=category]').val()
             },
             success: function(response) {
                 if (response.status) {

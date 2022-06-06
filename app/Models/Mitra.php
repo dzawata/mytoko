@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Category extends Model
+class Mitra extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = "categories";
+    protected $table = "mitra";
 
     protected $fillable = [
-        'category', 'created_at', 'updated_at'
+        'mitra', 'created_at', 'updated_at'
     ];
 }

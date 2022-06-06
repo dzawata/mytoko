@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Services\MitraService;
+use App\Services\PermissionService;
 use App\Services\ProductService;
+use Spatie\Permission\Contracts\Permission;
 
 class ProductsController extends Controller
 {
@@ -21,14 +24,15 @@ class ProductsController extends Controller
     {
         return view('admin.pages.product.index', [
             'title' => 'Products',
-            'products' => $this->productService->list()
+            'products' => $this->productService->list(),
         ]);
     }
 
-    public function create()
+    public function create(MitraService $mitraService)
     {
         return view('admin.pages.product.create', [
-            'title' => 'Tambah Product'
+            'title' => 'Tambah Product',
+            'rekanan' => $mitraService->list()
         ]);
     }
 
@@ -49,11 +53,12 @@ class ProductsController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit($id, MitraService $mitraService)
     {
         return view('admin.pages.product.edit', [
             'title' => 'Edit Product',
-            'product' => $this->productService->find($id)
+            'product' => $this->productService->find($id),
+            'rekanan' => $mitraService->list()
         ]);
     }
 

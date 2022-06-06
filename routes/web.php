@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MitraController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PermissionController;
@@ -77,8 +79,24 @@ Route::prefix('admin')
         Route::get('order/{id}/items', [OrderItemController::class, 'list'])->name('order-items');
         Route::get('order/{id}/item/create', [OrderItemController::class, 'create'])->name('create-order-item');
         Route::post('order/{id}/item/store', [OrderItemController::class, 'store'])->name('store-order-item');
+        Route::get('order/{orderId}/item/{itemId}/edit', [OrderItemController::class, 'edit'])->name('edit-order-item');
+        Route::put('order/{orderId}/item/update/{itemId}', [OrderItemController::class, 'update'])->name('update-order-item');
+        Route::delete('order/{orderId}/item/delete/{itemId}', [OrderItemController::class, 'delete'])->name('delete-order-item');
+
+        Route::get('categories', [CategoryController::class, 'index'])->name('categories');
+        Route::get('categories/create', [CategoryController::class, 'create'])->name('create-category');
+        Route::post('categories/store', [CategoryController::class, 'store'])->name('store-category');
+        Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('edit-category');
+        Route::put('categories/update/{id}', [CategoryController::class, 'update'])->name('update-category');
+        Route::delete('categories/delete/{id}', [CategoryController::class, 'delete'])->name('delete-category');
+
+        Route::get('mitra', [MitraController::class, 'index'])->name('mitra');
+        Route::get('mitra/create', [MitraController::class, 'create'])->name('create-mitra');
+        Route::post('mitra/store', [MitraController::class, 'store'])->name('store-mitra');
+        Route::get('mitra/{id}/edit', [MitraController::class, 'edit'])->name('edit-mitra');
+        Route::put('mitra/update/{id}', [MitraController::class, 'update'])->name('update-mitra');
+        Route::delete('mitra/delete/{id}', [MitraController::class, 'delete'])->name('delete-mitra');
 
         Route::get('remove-cache', [SettingController::class, 'removeCacheRoleAndPermission'])->name('remove-cache');
-
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     });

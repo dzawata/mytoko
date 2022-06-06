@@ -24,26 +24,26 @@
     <div class="card-body">
         <div class="row">
             <div class="col-lg-6">
-                <form id="form-create" data-action="{{ route('store-product') }}" data-page-url="{{ route('products') }}">
+                <form id="form-update" data-action="{{ route('update-order-item', [$order_item->order_id, $order_item->id]) }}" data-page-url="{{ route('order-items', $order_item->order_id) }}">
                     <div class="form-group">
-                        <label>Nama Product</label>
-                        <input class="form-control" type="text" name="product_name" onkeyup="typeSlug(this)" autocomplete="off">
-                        <p class="help-block help-block-product_name"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Slug</label>
-                        <input class="form-control" type="text" name="slug" autocomplete="off" readonly>
-                        <p class="help-block help-block-slug"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Mitra</label>
-                        <select id="owner" name="owner" multiple>
-                            @foreach($rekanan as $rekan)
-                            <option value="{{ $rekan->id }}">{{ $rekan->mitra }}</option>
+                        <label>Product</label>
+                        <select class="form-control" id="product" name="product" data-value="{{$order_item->product_id}}">
+                            @foreach($products as $product)
+                            <option value="{{ $product->id }}">{{ $product->product_name }}</option>
                             @endforeach
                         </select>
+                        <p class="help-block help-block-product"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Keterangan</label>
+                        <textarea class="form-control" id="keterangan" name="keterangan">{{ $order_item->keterangan }}</textarea>
+                        <p class="help-block help-block-keterangan"></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan</label>
+                        <textarea class="form-control" id="catatan" name="catatan">{{ $order_item->catatan }}</textarea>
                         <p class="help-block help-block-owner"></p>
                     </div>
 
@@ -54,7 +54,7 @@
                             </span>
                             <span class="text">Kembali</span>
                         </a>
-                        @can('create_product')
+                        @can('update_order_item')
                         <a href="javascript:void(0)" class="btn btn-sm btn-primary btn-icon-split simpan-data">
                             <span class="icon text-white-50">
                                 <i class="fas fa-save"></i>
@@ -72,17 +72,13 @@
 @endsection
 
 @push('addon-script')
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.1/slimselect.min.js"></script>
 <script>
-    let pageUrl = jQuery('#form-create').data('page-url');
+    let pageUrl = jQuery('#form-update').data('page-url');
 
-    const displaySelect = new SlimSelect({
-        select: '#owner'
-    })
+    jQuery('#product').val(jQuery("#product").data('value'));
 
     jQuery('.simpan-data').on('click', function() {
-        let url = jQuery('#form-create').data('action');
+        let url = jQuery('#form-update').data('action');
 
         jQuery.ajax({
             'headers': {
@@ -93,9 +89,10 @@
             'dataType': 'json',
             'cache': false,
             'data': {
-                'product_name': jQuery('input[name=product_name]').val(),
-                'slug': jQuery('input[name=slug]').val(),
-                'owner': jQuery('select[name=owner]').val()
+                '_method': 'PUT',
+                'product': jQuery('#product').val(),
+                'keterangan': jQuery('#keterangan').val(),
+                'catatan': jQuery('#catatan').val()
             },
             success: function(response) {
                 if (response.status) {

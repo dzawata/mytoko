@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Exception;
+use Illuminate\Http\Request;
 use App\Http\Requests\CreateOrderItemRequest;
+use App\Http\Requests\UpdateOrderItemRequest;
 use App\Services\OrderItemService;
 use App\Services\OrderService;
 use App\Services\ProductService;
@@ -50,6 +52,59 @@ class OrderItemController extends Controller
             return response()->json([
                 'status' => true,
                 'data' => $orderItem
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function edit(int $orderId, int $itemId)
+    {
+        try {
+
+            return view('admin.pages.order-items.edit', [
+                'title' => 'Edit Order',
+                'order_id' => $orderId,
+                'order_item' => $this->orderItemService->find($orderId, $itemId),
+                'products' => $this->productService->list()
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function update(UpdateOrderItemRequest $request, $orderId, $itemId)
+    {
+        try {
+            $orderItem = $this->orderItemService->update($request, $orderId, $itemId);
+
+            return response()->json([
+                'status' => true,
+                'data' => $orderItem
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function delete($orderId, $itemId)
+    {
+        try {
+
+            $this->orderItemService->delete($orderId, $itemId);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Sukses hapus data'
             ]);
         } catch (Exception $e) {
             return response()->json([
