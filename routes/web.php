@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Front\HomeController;
+use App\Http\Controllers\Front\ProductItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ use App\Http\Controllers\Front\HomeController;
 */
 
 Route::get('/', [HomeController::class, 'home']);
+Route::get('/home', [HomeController::class, 'home']);
+Route::get('/product-item', [ProductItemController::class, 'index'])->name('product-item');
 
 Route::get('login', [LoginController::class, 'index']);
 Route::post('login/auth', [LoginController::class, 'authenticate'])->name('auth');
