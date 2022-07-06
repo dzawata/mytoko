@@ -49,7 +49,7 @@
                     @foreach($galleries as $gallery)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $gallery->image }}</td>
+                        <td><img src="{{ asset('storage/'.$gallery->image)  }}" width="10%"></td>
                         <td class="text-center">
                             <a href="{{ asset('storage/'.$gallery->image)  }}" target="_blank" data-id="{{ $gallery->id }}" class="btn btn-info btn-circle btn-sm">
                                 <i class="fas fa-eye"></i>

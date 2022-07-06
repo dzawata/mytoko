@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Exception;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateOrderItemRequest;
 use App\Http\Requests\UpdateOrderItemRequest;
 use App\Services\OrderItemService;

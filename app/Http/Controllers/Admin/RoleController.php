@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Exception;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Services\PermissionService;
 use App\Services\RoleService;
-use Exception;
-use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {

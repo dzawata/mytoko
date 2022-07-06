@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\MitraController;
-use App\Http\Controllers\OrderItemController;
-use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProductGalleriesController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UsersController;
-use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\MitraController;
+use App\Http\Controllers\Admin\OrderItemController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\ProductGalleriesController;
+use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Admin\SettingController;
 
 /*
 |--------------------------------------------------------------------------

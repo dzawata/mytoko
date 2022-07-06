@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Exception;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Services\MitraService;
-use App\Services\PermissionService;
 use App\Services\ProductService;
-use Spatie\Permission\Contracts\Permission;
 
 class ProductsController extends Controller
 {

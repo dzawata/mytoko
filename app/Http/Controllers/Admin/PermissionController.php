@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Exception;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePermissionRequest;
 use App\Services\PermissionService;
 

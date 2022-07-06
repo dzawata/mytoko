@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Exception;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateMitraRequest;
 use App\Http\Requests\UpdateMitraRequest;
 use App\Services\MitraService;

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use Exception;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
-use App\Services\OrderItemService;
 use App\Services\OrderService;
-use Exception;
-use Illuminate\Http\Request;
 
 class OrdersController extends Controller
 {
