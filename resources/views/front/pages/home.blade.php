@@ -1,7 +1,7 @@
 @extends('front.layouts.app')
 
 @section('title')
-Home
+{{$title}}
 @endsection
 
 @section('content')
