@@ -3,7 +3,7 @@
 /public/storage
 /public/html
 /public/template
-/resources/views/front/tempalte/
+/resources/views/front/template/
 /storage/*.key
 /vendor
 .env
