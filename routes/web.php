@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Front\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,7 @@ use App\Http\Controllers\Admin\SettingController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'home']);
 
 Route::get('login', [LoginController::class, 'index']);
 Route::post('login/auth', [LoginController::class, 'authenticate'])->name('auth');
