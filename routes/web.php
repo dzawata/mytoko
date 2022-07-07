@@ -29,7 +29,7 @@ use App\Http\Controllers\Front\ProductItemController;
 
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/home', [HomeController::class, 'home']);
-Route::get('/product-item', [ProductItemController::class, 'index'])->name('product-item');
+Route::get('/product-item/{id}', [ProductItemController::class, 'index'])->name('product-item');
 
 Route::get('login', [LoginController::class, 'index']);
 Route::post('login/auth', [LoginController::class, 'authenticate'])->name('auth');
