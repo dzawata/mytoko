@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Front\ProductItemController;
+use Spatie\Permission\Contracts\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,67 +38,86 @@ Route::post('login/auth', [LoginController::class, 'authenticate'])->name('auth'
 Route::prefix('admin')
     ->middleware(['auth.basic'])
     ->group(function ($router) {
+
         Route::get('/', [DashboardController::class, 'index']);
         Route::get('dashboard', [DashboardController::class, 'index']);
 
-        Route::get('users', [UsersController::class, 'index'])->name('users');
-        Route::get('users/create', [UsersController::class, 'create'])->name('create-user');
-        Route::post('users/store', [UsersController::class, 'store'])->name('store-user');
-        Route::get('users/{id}/edit', [UsersController::class, 'edit'])->name('edit-user');
-        Route::put('users/update/{id}', [UsersController::class, 'update'])->name('update-user');
-        Route::delete('users/delete/{id}', [UsersController::class, 'delete'])->name('delete-user');
+        Route::controller(UsersController::class)->group(function () {
+            Route::get('users', 'index')->name('users');
+            Route::get('users/create', 'create')->name('create-user');
+            Route::post('users/store', 'store')->name('store-user');
+            Route::get('users/{id}/edit', 'edit')->name('edit-user');
+            Route::put('users/update/{id}', 'update')->name('update-user');
+            Route::delete('users/delete/{id}', 'delete')->name('delete-user');
+        });
 
-        Route::get('roles', [RoleController::class, 'index'])->name('roles');
-        Route::get('roles/create', [RoleController::class, 'create'])->name('create-role');
-        Route::post('roles/store', [RoleController::class, 'store'])->name('store-role');
-        Route::get('roles/{id}/edit', [RoleController::class, 'edit'])->name('edit-role');
-        Route::put('roles/update/{id}', [RoleController::class, 'update'])->name('update-role');
-        Route::delete('roles/delete/{id}', [RoleController::class, 'delete'])->name('delete-role');
+        Route::controller(RoleController::class)->group(function () {
+            Route::get('roles', 'index')->name('roles');
+            Route::get('roles/create', 'create')->name('create-role');
+            Route::post('roles/store', 'store')->name('store-role');
+            Route::get('roles/{id}/edit', 'edit')->name('edit-role');
+            Route::put('roles/update/{id}', 'update')->name('update-role');
+            Route::delete('roles/delete/{id}', 'delete')->name('delete-role');
+        });
 
-        Route::get('permissions', [PermissionController::class, 'index'])->name('permissions');
-        Route::get('permissions/create', [PermissionController::class, 'create'])->name('create-permission');
-        Route::post('permissions/store', [PermissionController::class, 'store'])->name('store-permission');
-        Route::delete('permissions/delete/{id}', [PermissionController::class, 'delete'])->name('delete-permission');
+        Route::controller(Permission::class)->group(function () {
+            Route::get('permissions', 'index')->name('permissions');
+            Route::get('permissions/create', 'create')->name('create-permission');
+            Route::post('permissions/store', 'store')->name('store-permission');
+            Route::delete('permissions/delete/{id}', 'delete')->name('delete-permission');
+        });
 
-        Route::get('products', [ProductsController::class, 'index'])->name('products');
-        Route::get('product/create', [ProductsController::class, 'create'])->name('create-product');
-        Route::post('product/store', [ProductsController::class, 'store'])->name('store-product');
-        Route::get('product/{id}/edit', [ProductsController::class, 'edit'])->name('edit-product');
-        Route::put('product/update/{id}', [ProductsController::class, 'update'])->name('update-product');
-        Route::delete('product/delete/{id}', [ProductsController::class, 'delete'])->name('delete-product');
+        Route::controller(ProductsController::class)->group(function () {
+            Route::get('products', 'index')->name('products');
+            Route::get('product/create', 'create')->name('create-product');
+            Route::post('product/store', 'store')->name('store-product');
+            Route::get('product/{id}/edit', 'edit')->name('edit-product');
+            Route::put('product/update/{id}', 'update')->name('update-product');
+            Route::delete('product/delete/{id}', 'delete')->name('delete-product');
+        });
 
-        Route::get('product-galleries/{id}', [ProductGalleriesController::class, 'show'])->name('product-galleries');
-        Route::get('product-galleries/create/{id}', [ProductGalleriesController::class, 'create'])->name('create-product-gallery');
-        Route::post('product-galleries/store/{id}', [ProductGalleriesController::class, 'store'])->name('store-product-gallery');
-        Route::delete('product-galleries/delete/{id}', [ProductGalleriesController::class, 'delete'])->name('delete-product-gallery');
+        Route::controller(ProductGalleriesController::class)->group(function () {
+            Route::get('product-galleries/{id}', 'show')->name('product-galleries');
+            Route::get('product-galleries/create/{id}', 'create')->name('create-product-gallery');
+            Route::post('product-galleries/store/{id}', 'store')->name('store-product-gallery');
+            Route::delete('product-galleries/delete/{id}', 'delete')->name('delete-product-gallery');
+        });
 
-        Route::get('order', [OrdersController::class, 'index'])->name('orders');
-        Route::get('order/create', [OrdersController::class, 'create'])->name('create-order');
-        Route::post('order/store', [OrdersController::class, 'store'])->name('store-order');
-        Route::get('order/{id}/edit', [OrdersController::class, 'edit'])->name('edit-order');
-        Route::put('order/update/{id}', [OrdersController::class, 'update'])->name('update-order');
-        Route::delete('order/delete/{id}', [OrdersController::class, 'delete'])->name('delete-order');
+        Route::controller(OrdersController::class)->group(function () {
+            Route::get('order', 'index')->name('orders');
+            Route::get('order/create', 'create')->name('create-order');
+            Route::post('order/store', 'store')->name('store-order');
+            Route::get('order/{id}/edit', 'edit')->name('edit-order');
+            Route::put('order/update/{id}', 'update')->name('update-order');
+            Route::delete('order/delete/{id}', 'delete')->name('delete-order');
+        });
 
-        Route::get('order/{id}/items', [OrderItemController::class, 'list'])->name('order-items');
-        Route::get('order/{id}/item/create', [OrderItemController::class, 'create'])->name('create-order-item');
-        Route::post('order/{id}/item/store', [OrderItemController::class, 'store'])->name('store-order-item');
-        Route::get('order/{orderId}/item/{itemId}/edit', [OrderItemController::class, 'edit'])->name('edit-order-item');
-        Route::put('order/{orderId}/item/update/{itemId}', [OrderItemController::class, 'update'])->name('update-order-item');
-        Route::delete('order/{orderId}/item/delete/{itemId}', [OrderItemController::class, 'delete'])->name('delete-order-item');
+        Route::controller(OrderItemController::class)->group(function () {
+            Route::get('order/{id}/items', 'list')->name('order-items');
+            Route::get('order/{id}/item/create', 'create')->name('create-order-item');
+            Route::post('order/{id}/item/store', 'store')->name('store-order-item');
+            Route::get('order/{orderId}/item/{itemId}/edit', 'edit')->name('edit-order-item');
+            Route::put('order/{orderId}/item/update/{itemId}', 'update')->name('update-order-item');
+            Route::delete('order/{orderId}/item/delete/{itemId}', 'delete')->name('delete-order-item');
+        });
 
-        Route::get('categories', [CategoryController::class, 'index'])->name('categories');
-        Route::get('categories/create', [CategoryController::class, 'create'])->name('create-category');
-        Route::post('categories/store', [CategoryController::class, 'store'])->name('store-category');
-        Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('edit-category');
-        Route::put('categories/update/{id}', [CategoryController::class, 'update'])->name('update-category');
-        Route::delete('categories/delete/{id}', [CategoryController::class, 'delete'])->name('delete-category');
+        Route::controller(CategoryController::class)->group(function () {
+            Route::get('categories', 'index')->name('categories');
+            Route::get('categories/create', 'create')->name('create-category');
+            Route::post('categories/store', 'store')->name('store-category');
+            Route::get('categories/{id}/edit', 'edit')->name('edit-category');
+            Route::put('categories/update/{id}', 'update')->name('update-category');
+            Route::delete('categories/delete/{id}', 'delete')->name('delete-category');
+        });
 
-        Route::get('mitra', [MitraController::class, 'index'])->name('mitra');
-        Route::get('mitra/create', [MitraController::class, 'create'])->name('create-mitra');
-        Route::post('mitra/store', [MitraController::class, 'store'])->name('store-mitra');
-        Route::get('mitra/{id}/edit', [MitraController::class, 'edit'])->name('edit-mitra');
-        Route::put('mitra/update/{id}', [MitraController::class, 'update'])->name('update-mitra');
-        Route::delete('mitra/delete/{id}', [MitraController::class, 'delete'])->name('delete-mitra');
+        Route::controller(MitraController::class)->group(function () {
+            Route::get('mitra', 'index')->name('mitra');
+            Route::get('mitra/create', 'create')->name('create-mitra');
+            Route::post('mitra/store', 'store')->name('store-mitra');
+            Route::get('mitra/{id}/edit', 'edit')->name('edit-mitra');
+            Route::put('mitra/update/{id}', 'update')->name('update-mitra');
+            Route::delete('mitra/delete/{id}', 'delete')->name('delete-mitra');
+        });
 
         Route::get('remove-cache', [SettingController::class, 'removeCacheRoleAndPermission'])->name('remove-cache');
         Route::post('logout', [LoginController::class, 'logout'])->name('logout');
