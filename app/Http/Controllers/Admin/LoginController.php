@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Support\Facades\Auth;
+use App\Services\AuthService;
 
 class LoginController extends Controller
 {
@@ -14,15 +13,16 @@ class LoginController extends Controller
         return view('admin.pages.login');
     }
 
-    public function authenticate(Request $request)
+    public function authenticate(Request $request, AuthService $authService)
     {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials, $request->rememberme)) {
-            $request->session()->regenerate();
+        $auth = $authService->authenticate($credentials, $request);
+
+        if ($auth->status) {
 
             return response()->json([
                 'status' => true,
@@ -36,13 +36,10 @@ class LoginController extends Controller
         ]);
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request, AuthService $authService)
     {
-        Auth::logout();
 
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
+        $authService->logout($request);
 
         return redirect('login');
     }
