@@ -5,9 +5,15 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\AuthService;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    public function __construct()
+    {
+    }
+
+
     public function index()
     {
         return view('admin.pages.login');
@@ -41,6 +47,6 @@ class LoginController extends Controller
 
         $authService->logout($request);
 
-        return redirect('login');
+        return redirect('home');
     }
 }

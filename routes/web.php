@@ -29,10 +29,10 @@ use Spatie\Permission\Contracts\Permission;
 */
 
 Route::get('/', [HomeController::class, 'home']);
-Route::get('/home', [HomeController::class, 'home']);
+Route::get('/home', [HomeController::class, 'home'])->name('home');
 Route::get('/product/{slug}', [ProductItemController::class, 'index'])->name('product-item');
 
-Route::get('login', [LoginController::class, 'index']);
+Route::get('login', [LoginController::class, 'index'])->name('login');
 Route::post('login/auth', [LoginController::class, 'authenticate'])->name('auth');
 
 Route::prefix('admin')
