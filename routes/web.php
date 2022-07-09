@@ -30,6 +30,15 @@ use Spatie\Permission\Contracts\Permission;
 
 Route::get('/', [HomeController::class, 'home']);
 Route::get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/products', function () {
+    echo 'Dalam pengembangan';
+})->name('all-products');
+Route::get('/products/popular', function () {
+    echo 'Dalam pengembangan';
+})->name('popular');
+Route::get('/products/new', function () {
+    echo 'Dalam pengembangan';
+})->name('new');
 Route::get('/product/{slug}', [ProductItemController::class, 'index'])->name('product-item');
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
