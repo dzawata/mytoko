@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Exception;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 
 class ProductService
@@ -36,9 +37,16 @@ class ProductService
         return $products;
     }
 
-    public function find($id)
+    public function find(int $id)
     {
         return Product::findOrFail($id);
+    }
+
+    public function findBySlug(string $slug)
+    {
+        return DB::table('products')->where([
+            'slug' => $slug
+        ])->first();
     }
 
     public function store($request)

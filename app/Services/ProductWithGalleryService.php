@@ -44,4 +44,24 @@ class ProductWithGalleryService
 
         return $data;
     }
+
+    public function item($slug)
+    {
+        $product = $this->productService->findBySlug($slug);
+
+        $images = [];
+        $galleries = $this->productGalleryService->show($product->id);
+        foreach ($galleries as $keyGallery => $gallery) {
+
+            if ($gallery->is_cover) {
+                $product->cover = $gallery->image;
+            } else {
+                $images[] = $gallery->image;
+            }
+        }
+
+        $product->images = (object)$images;
+
+        return $product;
+    }
 }
