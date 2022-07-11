@@ -11,10 +11,12 @@ class ProductItemController extends Controller
     public function index(Request $request, ProductWithGalleryService $productWithGalleryService)
     {
         $product = $productWithGalleryService->item($request->slug);
+        $relates = $productWithGalleryService->relate($request->slug);
 
         return view('front.pages.product-item', [
             'title' => $product->product_name . ' | Bunehaba Shop',
-            'product' => $product
+            'product' => $product,
+            'relates' => $relates
         ]);
     }
 }

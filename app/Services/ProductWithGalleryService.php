@@ -64,4 +64,33 @@ class ProductWithGalleryService
 
         return $product;
     }
+
+    public function relate($slug)
+    {
+        $products = $this->productService->list();
+
+        $data = [];
+        foreach ($products as $keyProduct => $product) {
+
+            if ($product->slug !== $slug) {
+                $galleries = $this->productGalleryService->show($product->id);
+                foreach ($galleries as $keyGallery => $gallery) {
+
+                    if ($gallery->is_cover) {
+                        if (empty($data[$product->id])) {
+                            $data[$product->id] = (object)[
+                                'id' => $product->id,
+                                'product_name' => $product->product_name,
+                                'slug' => $product->slug,
+                                'owner' => $product->owner,
+                                'img' => $gallery->image,
+                            ];
+                        }
+                    }
+                }
+            }
+        }
+
+        return $data;
+    }
 }
