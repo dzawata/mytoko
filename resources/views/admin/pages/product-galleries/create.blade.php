@@ -32,6 +32,12 @@
                         <p class="help-block help-block-image"></p>
                     </div>
 
+                    <div class="form-group">
+                        <label>Gambar Utama</label>
+                        <input class="" type="checkbox" name="cover">
+                        <p class="help-block help-block-cover"></p>
+                    </div>
+
                     <div class="text-right">
                         <a href="javascript:void(0)" class="btn btn-sm btn-warning btn-icon-split kembali">
                             <span class="icon text-white-50">

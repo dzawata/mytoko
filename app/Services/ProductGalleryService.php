@@ -16,10 +16,16 @@ class ProductGalleryService
 
     public function store($request, int $id)
     {
+        $is_cover = 0;
+        if ($request->cover == 'on') {
+            $is_cover = 1;
+        }
+
         try {
             return ProductGalleries::create([
                 'product_id' => $id,
-                'image' => $request->file('image')->store('assets/product-galleries', 'public')
+                'image' => $request->file('image')->store('assets/product-galleries', 'public'),
+                'is_cover' =>  $is_cover
             ]);
         } catch (Exception $e) {
             throw $e;
